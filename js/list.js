@@ -45,19 +45,19 @@ function isHTML(str) {
 function complete(id) {
 	var elem = $('#person' + id);
 
-	if(elem.val() == 1) {
-		elem.css("background-color", "#eee");
-		$('#para' + id).css("display", "none");
-		elem.val(0);
-		elem.append('<i class="fa fa-check-square fa-2x fa-fw" aria-hidden="true" id="check'+id+'"></i>');
-	} else {
+	if (elem.css("background-color") == "rgb(204, 204, 204)") {
 		elem.css("background-color", "white");
 		$('#para' + id).css("display", "block");
-		elem.val(1);
+		// elem.val(1);
 		$('#check' + id).remove();
+		$('#otherList #person' + id).appendTo('#myList');
+	} else {
+		elem.css("background-color", "#eee");
+		$('#para' + id).css("display", "none");
+		// elem.val(0);
+		elem.append('<i class="fa fa-check-square fa-2x fa-fw" aria-hidden="true" id="check'+id+'"></i>');
+		$('#myList #person' + id).appendTo('#otherList');
 	}
-
-
 
 }
 
@@ -107,8 +107,7 @@ $('#addItemButton').click(function() {
 		// Append the new person to the element with id="myList"
 		// $('#myList').append('<a href="#" class="list-group-item" id="person' + numItems + '" value="1" onClick="complete('+numItems+')">');
 		
-		$('#myList').append('<li onClick="complete('+numItems+')" class="list-group-item" id="person' + numItems + '" value="1">');
-			// + (numItems + 1) + ') ' + item + "  ");
+		$('#myList').append('<li onClick="complete('+numItems+')" class="list-group-item" id="person' +numItems+ '" value="' +(numItems+1)+ '">');
 
 		$('#person' + numItems).append('<h4 class="list-group-item-heading">' + (numItems + 1) + ') ' + item + '</h4>');
 		// if there isn't content in text area don't add anything extra
@@ -138,3 +137,5 @@ $('#addItemButton').click(function() {
 		$('#myComment').val('');
 	}
 });
+
+

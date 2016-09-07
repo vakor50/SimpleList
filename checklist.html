@@ -8,6 +8,7 @@
 	<meta name="description" content="">
 	<meta name="author" content="">
 
+	<title>To Do List</title>
 
 	<!-- Link for bootstrap -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -28,68 +29,76 @@
 <body>
 	<div class="container">
 		<!-- Navigation -->
-		<nav class="navbar navbar-custom navbar-fixed-top" role="navigation">
+		<nav class="navbar navbar-custom navbar-static-top" role="navigation">
 			<div class="container">
 				<div class="navbar-header">
 					<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-main-collapse">
 						Menu <i class="fa fa-bars"></i>
 					</button>
-					<a class="navbar-brand page-scroll" href="#page-top">
-						Start Bootstrap
-					</a>
+					<!-- <a class="title navbar-brand page-scroll" href="#page-top">
+						To Do List
+					</a> -->
 				</div>
 
 				<!-- Collect the nav links, forms, and other content for toggling -->
-				<div class="collapse navbar-collapse navbar-right navbar-main-collapse">
-					<ul class="nav navbar-nav">
-						<!-- Hidden li included to remove active class from about link when scrolled up past about section -->
-						<li class="hidden">
-							<a href="#page-top"></a>
-						</li>
-						<li>
-							<a class="page-scroll" href="#about">About</a>
-						</li>
-						<li>
-							<a class="page-scroll" href="#download">Download</a>
-						</li>
-						<li>
-							<a class="page-scroll" href="#contact">Contact</a>
-						</li>
-					</ul>
+				<div class="collapse navbar-collapse navbar-right">
+					<p class="navbar-text">
+						<a class="page-scroll title" href="https://github.com/vakor50/SimpleList">Source</a>
+					</p>
+					<p class="navbar-text">
+						<a class="page-scroll title" href="https://vakor50.github.io/">Contact</a>
+					</p>
 				</div>
 				<!-- /.navbar-collapse -->
 			</div>
 			<!-- /.container -->
 		</nav>
 
+		<div class="row">
 
-		<div  id="sector1">
-		
-		<!-- ******************************************** -->
-		<!-- 			   Add a Person			      	  -->
-		<!-- ******************************************** --> 
-		<div  id="addItem" class="form-inline">
-      		<input class="form-control" type="text" id="myText" placeholder="Enter task name">
-      		<br>
-	      	<textarea id="myComment" placeholder="Enter details" class="form-control" rows="3"></textarea>
-	      	<br>
-   			<button id="addItemButton" class="btn btn-primary">Add Task</button>
-     	</div>
+			<div  id="sector1" class="col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3">
 
-		<!-- ******************************************** -->
-		<!-- 			  Trip Participants 			  -->
-		<!-- ******************************************** --> 
-		<ul id="myList" class="list-group">
-			<!-- <li class="list-group-item" >Trip Participants</li> -->
-		</ul>
+				<h1 class="product">
+					To Do List
+				</h1>
+			
+				<!-- ******************************************** -->
+				<!-- 			   Add a List Element	      	  -->
+				<!-- ******************************************** --> 
+				<div  id="addItem" class="form-inline">
+		      		<input class="form-control input" type="text" id="myText" placeholder="Enter task name">
 
+		      		<br>
 
-		<!-- <div id="myList" class="list-group">
+			      	<textarea id="myComment" placeholder="Enter details" class="form-control input" rows="3"></textarea>
 
-		</div> -->
+			      	<br>
+		   			<button id="addItemButton" class="btn">Add Task</button>
+		     	</div>
+
+				<!-- ******************************************** -->
+				<!-- 			  Items on ToDo List 			  -->
+				<!-- ******************************************** -->
+
+				<div class="panel panel-default" style="margin-top: 20px; background-color: #0E0B16;">
+
+					<!-- List group -->
+					<ul id="myList" class="list-group">
+
+					</ul>
+
+					<!-- List group -->
+					<ul id="otherList" class="list-group">
+
+					</ul>
+
+				</div>
+
+				
+
+			</div>
 
 	</div>
-
 
 	<!-- Include code to handle buttons -->
 	<script type="text/javascript" src="js/list.js"></script>

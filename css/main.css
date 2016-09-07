@@ -1,37 +1,135 @@
 html, body, .container {
 	min-width: 400px;
 	width: auto!important;
+	background-color: #0E0B16; /* Void */
+}
+
+/************************************************/
+/*						Navbar					*/
+/************************************************/
+
+.title {
+	text-decoration: none;
+	color: rgba(255, 255, 255, 0.7);
+}
+
+.title:hover {
+	text-decoration: none;
+	color: rgba(255, 255, 255, 1);
+}
+
+.navbar-nav li:hover {
+	background-color: #0E0B16; /* Void */
 }
 
 #sector1 {
 	margin-top:50px;
 }
 
+.product {
+	text-decoration: none;
+	color: rgba(255, 255, 255, 0.85);
+}
+
+/************************************************/
+/*						Input					*/
+/************************************************/
+
+.input {
+	background-color: #0E0B16; /* Void */]
+	border-radius: 0;
+	border-color: rgba(255, 255, 255, 0.2); 
+	color: rgba(255, 255, 255, 0.5);
+}
+
+div .input:focus {
+	border-color: white;
+	color: rgba(255, 255, 255, 0.5);
+}
+
+#myText {
+	font-family: Arial, Helvetica, sans-serif;
+	width: 100%;
+	margin-bottom: 10px;
+	padding: 25px 20px;
+	box-shadow: none;
+}
+
+#myComment {
+	font-family: Arial, Helvetica, sans-serif;
+	width: 100%;
+	margin-bottom: 20px;
+	padding: 15px 20px;
+	box-shadow: none;
+}
+
+/************************************************/
+/*					Add Button					*/
+/************************************************/
+
+.btn {
+	background-color: #4515f0; /* Blue */
+	color: #E7DFDD; /* Stark */
+	border-width: 0px;
+	border-radius: 0;
+	
+	/* Transitions */
+	-webkit-transition: background-color 1s;
+	-moz-transition: background-color 1s;
+	-o-transition: background-color 1s;
+	-ms-transition: background-color 1s;
+	transition: background-color 1s;
+}
+
+.btn:hover {
+	color: #E7DFDD; /* Stark */
+	background-color: #A238CA; /* Fuschia */
+}
+
+/************************************************/
+/*					Task List					*/
+/************************************************/
+
+.panel {
+	border-width: 0px;
+}
+
+ol li.list-group-item { 
+    list-style: decimal inside;
+    display: list-item;
+}
 
 #myList {
 	margin-top: 20px;
-	width: 50%;
+	width: 100%;
+	
 }
 
 #myList li {
 	padding: 20px;
+	background-color: rgba(255, 255, 255, 0.0) !important; 
+	color: white;
+	border: 1px solid rgba(255, 255, 255, 0.2);
+	
+	/* Transitions */
+	-webkit-transition: background-color 1s;
+	-moz-transition: background-color 1s;
+	-o-transition: background-color 1s;
+	-ms-transition: background-color 1s;
+	transition: background-color 1s;
 }
 
 #myList li:hover {
 	/* Use important so hover continues after click */
-	background-color: #eee!important; 
+	background-color: #ccc !important; 
+	color: #333;
 }
 
-
-
-#myText {
-	width: 50%;
-	margin-bottom: 10px;
-}
-
-#myComment {
-	width: 50%;
-	margin-bottom: 20px;
+#otherList li {
+	padding: 20px;
+	background-color: #ccc !important; 
+	color: #333;
+	border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 li i {
@@ -42,4 +140,8 @@ li i {
 li h4 {
 	display: inline-block;
 	/*width: 80%;*/
+}
+
+.list-group-item-heading {
+	margin: 0;
 }
