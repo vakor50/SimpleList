@@ -109,7 +109,7 @@ $('#addItemButton').click(function() {
 		
 		$('#myList').append('<li onClick="complete('+numItems+')" class="list-group-item" id="person' +numItems+ '" value="' +(numItems+1)+ '">');
 
-		$('#person' + numItems).append('<h4 class="list-group-item-heading">' + (numItems + 1) + ') ' + item + '</h4>');
+		$('#person' + numItems).append('<h4 class="list-group-item-heading">' /* + (numItems + 1) + ') '*/ + item + '</h4>');
 		// if there isn't content in text area don't add anything extra
 		if($('#myComment').val() == "") {
 			$('#myList').append('</li>');

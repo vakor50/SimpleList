@@ -94,9 +94,16 @@ div .input:focus {
 	border-width: 0px;
 }
 
-ol li.list-group-item { 
-    list-style: decimal inside;
-    display: list-item;
+ul li:before {
+    /*Using a Bootstrap glyphicon as the bullet point*/
+    content: "\e080";
+    font-family: 'Glyphicons Halflings';
+    font-size: 14px;
+    float: left;
+    /*margin-top: 4px;*/
+    /*margin-left: 0px;*/
+    margin-right: 10px;
+    color: #CCCCCC;
 }
 
 #myList {
