@@ -122,10 +122,11 @@ $('#addItemButton').click(function() {
 // 		 - Checked off and change color						//
 // ******************************************************** //
 $('ul').delegate('.task', 'click', function () {
+	console.log($(this));
 	if ($(this).data("comp")) {
 		$(this).data("comp", false);
 		// $(this).css("background-color", "#eee");
-		$('.desc').css("display", "block");
+		$(this).find('.desc').css("display", "block");
 		// $(this).val(1);
 		$('#check').remove();
 		$(this).appendTo('#myList');
@@ -133,7 +134,7 @@ $('ul').delegate('.task', 'click', function () {
 
 		$(this).data("comp", true);
 		// $(this).css("background-color", "white");
-		$('.desc').css("display", "none");
+		$(this).find('.desc').css("display", "none");
 		// $(this).val(0);
 		$(this).append('<i class="fa fa-check-square fa-2x fa-fw" aria-hidden="true" id="check"></i>');
 		$(this).appendTo('#otherList');
