@@ -87,7 +87,7 @@ $('#addItemButton').click(function() {
 		// $('#myList').append('<a href="#" class="list-group-item" id="note' + numItems + '" value="1" onClick="complete('+numItems+')">');
 		
 		$('#myList').append('<li class="list-group-item task" id="note' +numItems+ '" value="' +(numItems+1)+ '" data-comp="false"></li>');
-		$('#note' + numItems).append('<h4 class="list-group-item-heading"><span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>&nbsp;' + item + '</h4>');
+		$('#note' + numItems).append('<h4 class="list-group-item-heading"><span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>&nbsp;' + item + '</h4><i class="fa fa-times fa-2x fa-fw remove" aria-hidden="true"></i><i class="fa fa-square-o fa-2x fa-fw" aria-hidden="true" id="check"></i>');
 
 		// if there isn't content in text area don't add anything extra
 		if($('#myComment').val() == "") {
@@ -121,23 +121,27 @@ $('#addItemButton').click(function() {
 // 		jQuery Function to change stylings when li clicked	//
 // 		 - Checked off and change color						//
 // ******************************************************** //
-$('ul').delegate('.task', 'click', function () {
-	console.log($(this));
-	if ($(this).data("comp")) {
-		$(this).data("comp", false);
-		// $(this).css("background-color", "#eee");
-		$(this).find('.desc').css("display", "block");
-		// $(this).val(1);
-		$('#check').remove();
-		$(this).appendTo('#myList');
+$('ul').delegate('#check', 'click', function () {
+	$listElem = $(this).parent();
+	if ($listElem.data("comp")) {
+		// task is complete
+		$listElem.data("comp", false);
+		$listElem.find('.desc').css("display", "block");
+		$listElem.find('#check').attr('class', 'fa fa-square-o fa-2x fa-fw');
+		$listElem.appendTo('#myList');
 	} else {
-
-		$(this).data("comp", true);
-		// $(this).css("background-color", "white");
-		$(this).find('.desc').css("display", "none");
-		// $(this).val(0);
-		$(this).append('<i class="fa fa-check-square fa-2x fa-fw" aria-hidden="true" id="check"></i>');
-		$(this).appendTo('#otherList');
+		// task is not complete
+		$listElem.data("comp", true);
+		$listElem.find('.desc').css("display", "none");
+		$listElem.find('#check').attr('class', 'fa fa-check-square fa-2x fa-fw');		
+		$listElem.appendTo('#otherList');
 	}
 });
 
+// ******************************************************** //
+// 		jQuery Function to remove an li element 			//
+// 		 - x icon											//
+// ******************************************************** //
+$('ul').delegate('.remove', 'click', function () {
+	$(this).parent().remove();
+});

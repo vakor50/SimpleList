@@ -12,11 +12,14 @@ It can be difficult to stay focussed, but a reminder of what's on your to-do lis
 ### Planned Functionality & To-Do
 
 - Clock along header:  Tuesday, Oct. 3, 2017		10:51 PM
-- Include option to delete tasks
 - tasks are stored in browser localStorage
+- on submit, move focus to the task input box
+- align/arrange remove and check boxes
 
 ### Completed
 
 - Re-organize layout so that adding is on the left and the task list is on the right
 - switch colors of completed and incomplete tasks
 - reduce size of chevron icon next to tasks
+- Include option to delete tasks
+

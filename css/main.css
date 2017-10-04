@@ -154,6 +154,7 @@ ul li:before {
 
 li i {
 	float: right;
+	cursor: pointer;
 	/*display: inline-block;*/
 }
 
