@@ -1,6 +1,7 @@
 html, body, .container {
 	min-width: 400px;
 	width: auto!important;
+	height: 100%;
 	background-color: #0E0B16; /* Void */
 }
 
@@ -63,6 +64,10 @@ div .input:focus {
 	box-shadow: none;
 }
 
+textarea {
+    resize: none;
+}
+
 /************************************************/
 /*					Add Button					*/
 /************************************************/
@@ -115,9 +120,9 @@ ul li:before {
 
 #myList li {
 	padding: 20px;
-	background-color: rgba(255, 255, 255, 0.0) !important; 
-	color: white;
-	border: 1px solid rgba(255, 255, 255, 0.2);
+	background-color: #ccc !important; 
+	color: #333;
+	border: 1px solid #333;
 	
 	/* Transitions */
 	-webkit-transition: background-color 1s;
@@ -135,9 +140,16 @@ ul li:before {
 
 #otherList li {
 	padding: 20px;
-	background-color: #ccc !important; 
-	color: #333;
+	background-color: rgba(255, 255, 255, 0.0) !important; 
+	color: white;
 	border: 1px solid rgba(255, 255, 255, 0.2);
+
+	/* Transitions */
+	-webkit-transition: background-color 1s;
+	-moz-transition: background-color 1s;
+	-o-transition: background-color 1s;
+	-ms-transition: background-color 1s;
+	transition: background-color 1s;
 }
 
 li i {

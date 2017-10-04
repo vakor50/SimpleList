@@ -86,9 +86,9 @@ $('#addItemButton').click(function() {
 		// Append the new note to the element with id="myList"
 		// $('#myList').append('<a href="#" class="list-group-item" id="note' + numItems + '" value="1" onClick="complete('+numItems+')">');
 		
-		$('#myList').append('<li  class="list-group-item task" id="note' +numItems+ '" value="' +(numItems+1)+ '"></li>');
+		$('#myList').append('<li class="list-group-item task" id="note' +numItems+ '" value="' +(numItems+1)+ '" data-comp="false"></li>');
+		$('#note' + numItems).append('<h4 class="list-group-item-heading"><span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>&nbsp;' + item + '</h4>');
 
-		$('#note' + numItems).append('<h4 class="list-group-item-heading"><span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>' + item + '</h4>');
 		// if there isn't content in text area don't add anything extra
 		if($('#myComment').val() == "") {
 			// $('#myList').append('');
@@ -122,14 +122,17 @@ $('#addItemButton').click(function() {
 // 		 - Checked off and change color						//
 // ******************************************************** //
 $('ul').delegate('.task', 'click', function () {
-	if ($(this).css("background-color") == "rgb(204, 204, 204)") {
-		$(this).css("background-color", "white");
+	if ($(this).data("comp")) {
+		$(this).data("comp", false);
+		// $(this).css("background-color", "#eee");
 		$('.desc').css("display", "block");
 		// $(this).val(1);
 		$('#check').remove();
 		$(this).appendTo('#myList');
 	} else {
-		$(this).css("background-color", "#eee");
+
+		$(this).data("comp", true);
+		// $(this).css("background-color", "white");
 		$('.desc').css("display", "none");
 		// $(this).val(0);
 		$(this).append('<i class="fa fa-check-square fa-2x fa-fw" aria-hidden="true" id="check"></i>');

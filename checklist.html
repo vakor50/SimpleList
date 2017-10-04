@@ -52,59 +52,47 @@
 		</nav>
 
 		<div class="row">
-
-			<div  id="sector1" class="col-md-5 col-md-offset-1 col-sm-5 col-sm-offset-1">
-
+			<div class="col-md-11 col-md-offset-1">
 				<h1 class="product">
 					To Do List
 				</h1>
-			
-				<!-- ******************************************** -->
-				<!-- 			   Add a List Element	      	  -->
-				<!-- ******************************************** --> 
-				<div  id="addItem" class="form-inline">
-		      		<input class="form-control input" type="text" id="myText" placeholder="Enter task name">
+				<div class="col-md-5 col-sm-5" style="margin-top: 20px;"">
 
-		      		<br>
-
-			      	<textarea id="myComment" placeholder="Enter details" class="form-control input" rows="3"></textarea>
-
-			      	<br>
-		   			<button id="addItemButton" class="btn">Add Task</button>
-		     	</div>
+					<!-- ******************************************** -->
+					<!-- 			   Add a List Element	      	  -->
+					<!-- ******************************************** --> 
+					<div  id="addItem" class="form-inline">
+						<input class="form-control input" type="text" id="myText" placeholder="Enter task name">
+						<br>
+						<textarea id="myComment" placeholder="Enter details" class="form-control input" rows="3"></textarea>
+						<br>
+						<button id="addItemButton" class="btn">Add Task</button>
+					</div>
+				</div>
 
 				<!-- ******************************************** -->
 				<!-- 			  Items on ToDo List 			  -->
 				<!-- ******************************************** -->
-			</div>
-			<div class="col-md-5 col-sm-5">
+				<div class="col-md-6 col-sm-6">
+					<div class="panel panel-default" style="margin-top: 20px; background-color: #0E0B16;">
+						<!-- List group -->
+						<ul id="myList" class="list-group">
+						</ul>
 
-				<div class="panel panel-default" style="margin-top: 20px; background-color: #0E0B16;">
-
-					<!-- List group -->
-					<ul id="myList" class="list-group">
-
-					</ul>
-
-					<!-- List group -->
-					<ul id="otherList" class="list-group">
-
-					</ul>
-
+						<!-- List group -->
+						<ul id="otherList" class="list-group">
+						</ul>
+					</div>
 				</div>
-
-				
-
 			</div>
+		</div>
 
-	</div>
+		<!-- jQuery -->
+		<script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
+		<!-- Bootstrap -->
+		<script type="text/javascript" src="js/bootstrap.min.js"></script>
 
-	<!-- jQuery -->
-	<script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
-	<!-- Bootstrap -->
-	<script type="text/javascript" src="js/bootstrap.min.js"></script>
-
-	<!-- Include code to handle buttons -->
-	<script type="text/javascript" src="js/list.js"></script>
-</body>
-</html>
+		<!-- Include code to handle buttons -->
+		<script type="text/javascript" src="js/list.js"></script>
+	</body>
+	</html>
