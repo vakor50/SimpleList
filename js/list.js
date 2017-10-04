@@ -38,32 +38,12 @@ function isHTML(str) {
 	return false;
 }
 
-// ******************************************************** //
-// 		JS Function to change stylings when li clicked		//
-// 		 - Checked off and change color						//
-// ******************************************************** //
-function complete(id) {
-	var elem = $('#person' + id);
 
-	if (elem.css("background-color") == "rgb(204, 204, 204)") {
-		elem.css("background-color", "white");
-		$('#para' + id).css("display", "block");
-		// elem.val(1);
-		$('#check' + id).remove();
-		$('#otherList #person' + id).appendTo('#myList');
-	} else {
-		elem.css("background-color", "#eee");
-		$('#para' + id).css("display", "none");
-		// elem.val(0);
-		elem.append('<i class="fa fa-check-square fa-2x fa-fw" aria-hidden="true" id="check'+id+'"></i>');
-		$('#myList #person' + id).appendTo('#otherList');
-	}
 
-}
 
 // ******************************************************** //
 //		JQuery Function to enable "enter" 					//
-//		 - When enter hit, "add person" button clicked		//
+//		 - When enter hit, "add note" button clicked		//
 // ******************************************************** //
 $("#myText").keyup(function(event){
 	// when enter key pressed
@@ -74,7 +54,7 @@ $("#myText").keyup(function(event){
 });
 // ******************************************************** //
 //		JQuery Function to enable "enter" 					//
-//		 - When enter hit, "add person" button clicked		//
+//		 - When enter hit, "add note" button clicked		//
 // ******************************************************** //
 $("#myComment").keyup(function(event){
 	// when enter key pressed
@@ -87,10 +67,9 @@ $("#myComment").keyup(function(event){
 // ******************************************************** //
 //		JQuery Function for Add Item Button 				//
 //		 - When element with id="AddItemButton" clicked,	//
-//			add person 										//
+//			add note 										//
 // ******************************************************** //
 $('#addItemButton').click(function() {
-
 	// make sure there is text in the item field
 	if($('#myText').val() == "") {
 		alert("Please enter an item");
@@ -104,15 +83,15 @@ $('#addItemButton').click(function() {
 		}
 		item = toName(item).trim();
 
-		// Append the new person to the element with id="myList"
-		// $('#myList').append('<a href="#" class="list-group-item" id="person' + numItems + '" value="1" onClick="complete('+numItems+')">');
+		// Append the new note to the element with id="myList"
+		// $('#myList').append('<a href="#" class="list-group-item" id="note' + numItems + '" value="1" onClick="complete('+numItems+')">');
 		
-		$('#myList').append('<li onClick="complete('+numItems+')" class="list-group-item" id="person' +numItems+ '" value="' +(numItems+1)+ '">');
+		$('#myList').append('<li  class="list-group-item task" id="note' +numItems+ '" value="' +(numItems+1)+ '"></li>');
 
-		$('#person' + numItems).append('<h4 class="list-group-item-heading">' /* + (numItems + 1) + ') '*/ + item + '</h4>');
+		$('#note' + numItems).append('<h4 class="list-group-item-heading"><span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>' + item + '</h4>');
 		// if there isn't content in text area don't add anything extra
 		if($('#myComment').val() == "") {
-			$('#myList').append('</li>');
+			// $('#myList').append('');
 		} else {
 			// Remove any html or white space on input
 			var comment = $('#myComment').val().trim();
@@ -122,7 +101,7 @@ $('#addItemButton').click(function() {
 			comment = comment.trim();
 
 			// append the information from the text area to the li
-			$('#person' + numItems).append('<p class="list-group-item-text" id="para'+numItems+'">' + comment + '</p></li>');
+			$('#note' + numItems).append('<p class="list-group-item-text desc">' + comment + '</p>');
 
 		}
 
@@ -138,4 +117,23 @@ $('#addItemButton').click(function() {
 	}
 });
 
+// ******************************************************** //
+// 		jQuery Function to change stylings when li clicked	//
+// 		 - Checked off and change color						//
+// ******************************************************** //
+$('ul').delegate('.task', 'click', function () {
+	if ($(this).css("background-color") == "rgb(204, 204, 204)") {
+		$(this).css("background-color", "white");
+		$('.desc').css("display", "block");
+		// $(this).val(1);
+		$('#check').remove();
+		$(this).appendTo('#myList');
+	} else {
+		$(this).css("background-color", "#eee");
+		$('.desc').css("display", "none");
+		// $(this).val(0);
+		$(this).append('<i class="fa fa-check-square fa-2x fa-fw" aria-hidden="true" id="check"></i>');
+		$(this).appendTo('#otherList');
+	}
+});
 

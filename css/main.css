@@ -97,14 +97,14 @@ div .input:focus {
 
 ul li:before {
     /*Using a Bootstrap glyphicon as the bullet point*/
-    content: "\e080";
-    font-family: 'Glyphicons Halflings';
-    font-size: 14px;
-    float: left;
+    /*content: "\e080";*/
+    /*font-family: 'Glyphicons Halflings';*/
+    /*font-size: 14px;*/
+    /*float: left;*/
     /*margin-top: 4px;*/
     /*margin-left: 0px;*/
-    margin-right: 10px;
-    color: #CCCCCC;
+    /*margin-right: 10px;*/
+    /*color: #CCCCCC;*/
 }
 
 #myList {
