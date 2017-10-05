@@ -149,12 +149,13 @@ $('ul').delegate('.remove', 'click', function () {
 var days = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
 var months = ["Jan.", "Feb.", "Mar.", "Apr.", "May", "June", "July", "Aug.", "Sept.", "Oct.", "Nov.", "Dec."];
 function tick() {
-	console.log("!");
+	// console.log("!");
     var d = new Date();
     var amPm = (d.getHours() >= 12) ? 'PM' : 'AM';
-    var time = (d.getHours()) + ':' + (d.getMinutes()) + ' ' + amPm;
+    var hours = (d.getHours() > 12) ? d.getHours() - 12 : d.getHours();
+    var time = hours + ':' + ((d.getMinutes()<10?'0':'') + d.getMinutes()) + ' ' + amPm;
     $('#time').html(time);
-    var date = days[d.getDay()] + ', ' + months[d.getMonth()] + ' ' + d.getDate() + ', ' + d.getFullYear();
+    var date = days[d.getDay()] + ' ' + months[d.getMonth()] + ' ' + d.getDate() + ', ' + d.getFullYear();
     $('#date').html(date);
     t = setTimeout(tick,5000);
 }
