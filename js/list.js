@@ -1,6 +1,7 @@
 var entries= [];
 var numItems = 0;
 
+
 // ******************************************************** //
 // 		JS Function to fix Name    							//
 // 		 - Eliminates white space							//
@@ -106,10 +107,15 @@ $('#addItemButton').click(function() {
 		}
 
 		// add item to list of entries
-		entries.push(item);
-		// console.log(entries);
+		entries.push([item, comment, (numItems+1)]);
 		// increment number of items
 		numItems = numItems + 1;
+
+		console.log("----\nAfter addition:" + numItems + " items");
+		console.log(entries);
+		localStorage["newTab_SimpleList_tasks"] = JSON.stringify(entries);
+		console.log(localStorage["newTab_SimpleList_tasks"]);
+		
 
 		// Reset input boxes
 		$('#myText').val('');
@@ -143,6 +149,16 @@ $('ul').delegate('#check', 'click', function () {
 // 		 - x icon											//
 // ******************************************************** //
 $('ul').delegate('.remove', 'click', function () {
+	for (var i = 0; i < entries.length; i++) {
+		if (entries[i][2] == $(this).parent().val()) {
+			entries.splice(i, 1);
+			console.log("----\nAfter remove:");
+			console.log(entries);
+			break;
+		}
+	}
+	localStorage["newTab_SimpleList_tasks"] = JSON.stringify(entries);
+	console.log(localStorage["newTab_SimpleList_tasks"]);
 	$(this).parent().remove();
 });
 
@@ -162,4 +178,19 @@ function tick() {
 
 $(document).ready(function () {
 	tick();
+
+	if (localStorage["newTab_SimpleList_tasks"] != null) {
+		entries = JSON.parse(localStorage["newTab_SimpleList_tasks"]);
+	}
+	// entries = [["help", "idk", 1], ["vir", "thakor", 2]];
+	for (var i = 0; i < entries.length; i++) {
+		$('#myList').append('<li class="list-group-item task" id="note' +numItems+ '" value="' +entries[i][2]+ '" data-comp="false"></li>');
+		$('#note' + numItems).append('<h4 class="list-group-item-heading"><span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>&nbsp;' + entries[i][0] + '</h4><i class="fa fa-times fa-2x fa-fw remove" aria-hidden="true"></i><i class="fa fa-square-o fa-2x fa-fw" aria-hidden="true" id="check"></i>');
+		$('#note' + numItems).append('<p class="list-group-item-text desc">' + entries[i][1] + '</p>');
+		if (numItems < entries[i][2]) {
+			numItems = entries[i][2];
+		}
+	}
+	console.log("----\nAfter load: " + numItems + " items");
+	console.log(entries);
 });
