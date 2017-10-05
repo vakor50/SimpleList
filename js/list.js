@@ -120,6 +120,7 @@ $('#addItemButton').click(function() {
 		// Reset input boxes
 		$('#myText').val('');
 		$('#myComment').val('');
+		$('#myText').focus();
 	}
 });
 
