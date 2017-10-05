@@ -11,7 +11,6 @@ It can be difficult to stay focussed, but a reminder of what's on your to-do lis
 
 ### Planned Functionality & To-Do
 
-- on submit, move focus to the task input box
 - align/arrange remove and check boxes
 
 ### Completed
@@ -22,5 +21,5 @@ It can be difficult to stay focussed, but a reminder of what's on your to-do lis
 - Include option to delete tasks
 - Clock along header:  Tuesday, Oct. 3, 2017		10:51 PM
 - tasks are stored in browser localStorage
-
+- on submit, move focus to the task input box
 

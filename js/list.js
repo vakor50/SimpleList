@@ -84,6 +84,8 @@ $('#addItemButton').click(function() {
 		}
 		item = toName(item).trim();
 
+		var comment = "";
+
 		// Append the new note to the element with id="myList"
 		// $('#myList').append('<a href="#" class="list-group-item" id="note' + numItems + '" value="1" onClick="complete('+numItems+')">');
 		
@@ -95,7 +97,7 @@ $('#addItemButton').click(function() {
 			// $('#myList').append('');
 		} else {
 			// Remove any html or white space on input
-			var comment = $('#myComment').val().trim();
+			comment = $('#myComment').val().trim();
 			if(isHTML(comment)) {
 				comment = $(comment)[0].textContent;
 			}
