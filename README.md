@@ -3,6 +3,16 @@
 Chrome Extension that takes over the new tab page to provide a place where you can track your most important tasks.
 It can be difficult to stay focussed, but a reminder of what's on your to-do list will be a nudge in the right direction.
 
+### Usage
+
+1. Download the folder. 
+2. In Chrome, go to Settings > More Tools > Extensions
+3. Click [ Load Unpacked Extension ]
+4. Select the folder downloaded from Github
+5. Enable the extension
+6. Create a new tab
+7. Profit
+
 ### Functionality
 
 - Task with optional description can be added to list
