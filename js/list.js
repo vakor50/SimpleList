@@ -145,3 +145,20 @@ $('ul').delegate('#check', 'click', function () {
 $('ul').delegate('.remove', 'click', function () {
 	$(this).parent().remove();
 });
+
+var days = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
+var months = ["Jan.", "Feb.", "Mar.", "Apr.", "May", "June", "July", "Aug.", "Sept.", "Oct.", "Nov.", "Dec."];
+function tick() {
+	console.log("!");
+    var d = new Date();
+    var amPm = (d.getHours() >= 12) ? 'PM' : 'AM';
+    var time = (d.getHours()) + ':' + (d.getMinutes()) + ' ' + amPm;
+    $('#time').html(time);
+    var date = days[d.getDay()] + ', ' + months[d.getMonth()] + ' ' + d.getDate() + ', ' + d.getFullYear();
+    $('#date').html(date);
+    t = setTimeout(tick,5000);
+}
+
+$(document).ready(function () {
+	tick();
+});
