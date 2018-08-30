@@ -89,7 +89,7 @@ $('#addItemButton').click(function() {
 		// Append the new note to the element with id="myList"
 		// $('#myList').append('<a href="#" class="list-group-item" id="note' + numItems + '" value="1" onClick="complete('+numItems+')">');
 		
-		$('#myList').append('<li class="list-group-item task" id="note' +numItems+ '" value="' +(numItems+1)+ '" data-comp="false"></li>');
+		$('#myList').append('<li class="list-group-item task" id="note' +numItems+ '" value="' + new Date().getTime() + '" data-comp="false"></li>');
 		$('#note' + numItems).append(
 			'<h4 class="list-group-item-heading">'
 				// + '<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>&nbsp;' 
@@ -116,7 +116,13 @@ $('#addItemButton').click(function() {
 		}
 
 		// add item to list of entries
-		entries.push([item, comment, new Date().getTime(), 0]);
+		entries.push({
+			taskName: item, 
+			description: comment, 
+			created: new Date().getTime(), 
+			completed: 0,
+			removed: false
+		});
 		// increment number of items
 		numItems = numItems + 1;
 
@@ -140,13 +146,13 @@ $('#addItemButton').click(function() {
 $('ul').delegate('#check', 'click', function () {
 	$listElem = $(this).parent();
 	for (var i = 0; i < entries.length; i++) {
-		if (entries[i][2] == $(this).parent().attr('value')) {
+		if (entries[i].created == $(this).parent().attr('value')) {
 			if ($listElem.data("comp")) {
 				// task was complete
-				entries[i][3] = 0;
+				entries[i].completed = 0;
 			} else {
 				// task is now complete
-				entries[i][3] = new Date().getTime();
+				entries[i].completed = new Date().getTime();
 			}
 		}
 	}
@@ -172,7 +178,7 @@ $('ul').delegate('#check', 'click', function () {
 // ******************************************************** //
 $('ul').delegate('.remove', 'click', function () {
 	for (var i = 0; i < entries.length; i++) {
-		if (entries[i][2] == $(this).parent().attr('value')) {
+		if (entries[i].created == $(this).parent().attr('value')) {
 			entries.splice(i, 1);
 			console.log("----\nAfter remove:");
 			console.log(entries);
@@ -198,6 +204,23 @@ function tick() {
     t = setTimeout(tick,5000);
 }
 
+function timeConvert(milli) {
+    var seconds = (milli / 1000).toFixed(1);
+    var minutes = (milli / (1000 * 60)).toFixed(1);
+    var hours = (milli / (1000 * 60 * 60)).toFixed(1);
+    var days = (milli / (1000 * 60 * 60 * 24)).toFixed(1);
+
+    if (seconds < 60) {
+        return seconds + " Sec";
+    } else if (minutes < 60) {
+        return minutes + " Min";
+    } else if (hours < 24) {
+        return hours + " Hrs";
+    } else {
+        return days + " Days"
+    }
+}
+
 $(document).ready(function () {
 	tick();
 
@@ -206,32 +229,41 @@ $(document).ready(function () {
 	}
 	// entries = [["help", "idk", 1], ["vir", "thakor", 2]];
 	for (var i = 0; i < entries.length; i++) {
-		if (entries[i][3] == 0) {
-			$('#myList').append('<li class="list-group-item task" id="note' +numItems+ '" value="' +entries[i][2]+ '" data-comp="false"></li>');
+		if (entries[i].completed == 0) {
+			$('#myList').append('<li class="list-group-item task" id="note' +numItems+ '" value="' + entries[i].created + '" data-comp="false"></li>');
 			$('#note' + numItems).append(
 				'<h4 class="list-group-item-heading">'
 					// + '<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>&nbsp;' 
-					+ '<strong>' + entries[i][0] + '</strong>' 
+					+ '<strong>' + entries[i].taskName + '</strong>' 
 				+ '</h4>'
 				+ '<button class="btn-custom remove" type="button"><i class="fa fa-times fa-2x fa-fw " aria-hidden="true"></i></button>' 
 				+ '<button class="btn-custom" id="check" type="button"><i class="fa fa-square-o fa-2x fa-fw" aria-hidden="true"></i></button>'
 			);
-			$('#note' + numItems).append('<p class="list-group-item-text desc" style="display: block;">' + entries[i][1] + '</p>');
+			$('#note' + numItems).append('<p class="list-group-item-text desc" style="display: block;">' + entries[i].description + '</p>');
 		} else {
-			$('#otherList').append('<li class="list-group-item task" id="note' +numItems+ '" value="' +entries[i][2]+ '" data-comp="true"></li>');
+			$('#otherList').append('<li class="list-group-item task" id="note' +numItems+ '" value="' + entries[i].created + '" data-comp="true"></li>');
 			$('#note' + numItems).append(
 				'<h4 class="list-group-item-heading">'
 					// + '<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>&nbsp;' 
-					+ '<strong>' + entries[i][0] + '</strong>' 
+					+ '<strong>' + entries[i].taskName + '</strong>' 
 				+ '</h4>'
 				+ '<button class="btn-custom remove" type="button"><i class="fa fa-times fa-2x fa-fw " aria-hidden="true"></i></button>' 
 				+ '<button class="btn-custom" id="check" type="button"><i class="fa fa-check-square fa-2x fa-fw" aria-hidden="true"></i></button>'
 			);
-			$('#note' + numItems).append('<p class="list-group-item-text desc" style="display: none;">' + entries[i][1] + '</p>');
+			$('#note' + numItems).append('<p class="list-group-item-text desc" style="display: none;">' + entries[i].description + '</p>');
 
 		}
 		numItems++;
 	}
 	console.log("----\nAfter load: " + numItems + " items");
 	console.log(entries);
+
+	var time_diff = 0
+	for (var i = 0; i < entries.length; i++) {
+		if (entries[i].completed > 0) {
+			time_diff += (entries[i].completed - entries[i].created); // completed - created
+		}
+	}
+	time_diff /= entries.length; // average time to complete a task
+	console.log((time_diff > 0) ? timeConvert(time_diff) : 'No completed tasks')
 });
