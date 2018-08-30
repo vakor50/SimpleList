@@ -177,6 +177,7 @@ ul li:before {
 	background-color: rgba(255, 255, 255, 0.0) !important; 
 	color: white;
 	border: 1px solid rgba(255, 255, 255, 0.2);
+	padding-bottom: 25px;
 
 	/* Transitions */
 	-webkit-transition: background-color 1s;

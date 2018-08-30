@@ -92,7 +92,8 @@ $('#addItemButton').click(function() {
 		$('#myList').append('<li class="list-group-item task" id="note' +numItems+ '" value="' +(numItems+1)+ '" data-comp="false"></li>');
 		$('#note' + numItems).append(
 			'<h4 class="list-group-item-heading">'
-			+ '<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>&nbsp;' + item 
+				// + '<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>&nbsp;' 
+				+ '<strong>' + item + '</strong>' 
 			+ '</h4>'
 			+ '<button class="btn-custom remove" type="button"><i class="fa fa-times fa-2x fa-fw " aria-hidden="true"></i></button>' 
 			+ '<button class="btn-custom" id="check" type="button"><i class="fa fa-square-o fa-2x fa-fw" aria-hidden="true"></i></button>'
@@ -110,16 +111,16 @@ $('#addItemButton').click(function() {
 			comment = comment.trim();
 
 			// append the information from the text area to the li
-			$('#note' + numItems).append('<p class="list-group-item-text desc">' + comment + '</p>');
+			$('#note' + numItems).append('<p class="list-group-item-text desc" style="display: block;">' + comment + '</p>');
 
 		}
 
 		// add item to list of entries
-		entries.push([item, comment, (numItems+1)]);
+		entries.push([item, comment, new Date().getTime(), 0]);
 		// increment number of items
 		numItems = numItems + 1;
 
-		console.log("----\nAfter addition:" + numItems + " items");
+		console.log("----\nAfter addition: " + numItems + " items");
 		console.log(entries);
 		localStorage["newTab_SimpleList_tasks"] = JSON.stringify(entries);
 		console.log(localStorage["newTab_SimpleList_tasks"]);
@@ -138,19 +139,31 @@ $('#addItemButton').click(function() {
 // ******************************************************** //
 $('ul').delegate('#check', 'click', function () {
 	$listElem = $(this).parent();
+	for (var i = 0; i < entries.length; i++) {
+		if (entries[i][2] == $(this).parent().attr('value')) {
+			if ($listElem.data("comp")) {
+				// task was complete
+				entries[i][3] = 0;
+			} else {
+				// task is now complete
+				entries[i][3] = new Date().getTime();
+			}
+		}
+	}
 	if ($listElem.data("comp")) {
-		// task is complete
+		// task was complete
 		$listElem.data("comp", false);
 		$listElem.find('.desc').css("display", "block");
-		$listElem.find('#check').attr('class', 'fa fa-square-o fa-2x fa-fw');
+		$listElem.find('#check > i').attr('class', 'fa fa-square-o fa-2x fa-fw');
 		$listElem.appendTo('#myList');
 	} else {
-		// task is not complete
+		// task is now complete
 		$listElem.data("comp", true);
 		$listElem.find('.desc').css("display", "none");
-		$listElem.find('#check').attr('class', 'fa fa-check-square fa-2x fa-fw');		
+		$listElem.find('#check > i').attr('class', 'fa fa-check-square fa-2x fa-fw');		
 		$listElem.appendTo('#otherList');
 	}
+	localStorage["newTab_SimpleList_tasks"] = JSON.stringify(entries);
 });
 
 // ******************************************************** //
@@ -159,7 +172,7 @@ $('ul').delegate('#check', 'click', function () {
 // ******************************************************** //
 $('ul').delegate('.remove', 'click', function () {
 	for (var i = 0; i < entries.length; i++) {
-		if (entries[i][2] == $(this).parent().val()) {
+		if (entries[i][2] == $(this).parent().attr('value')) {
 			entries.splice(i, 1);
 			console.log("----\nAfter remove:");
 			console.log(entries);
@@ -188,23 +201,36 @@ function tick() {
 $(document).ready(function () {
 	tick();
 
-	if (localStorage["newTab_SimpleList_tasks"] != null) {
+	if (localStorage["newTab_SimpleList_tasks"] != "") {
 		entries = JSON.parse(localStorage["newTab_SimpleList_tasks"]);
 	}
 	// entries = [["help", "idk", 1], ["vir", "thakor", 2]];
 	for (var i = 0; i < entries.length; i++) {
-		$('#myList').append('<li class="list-group-item task" id="note' +numItems+ '" value="' +entries[i][2]+ '" data-comp="false"></li>');
-		$('#note' + numItems).append(
-			'<h4 class="list-group-item-heading">'
-			+ '<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>&nbsp;' + entries[i][0] 
-			+ '</h4>'
-			+ '<button class="btn-custom remove" type="button"><i class="fa fa-times fa-2x fa-fw " aria-hidden="true"></i></button>' 
-			+ '<button class="btn-custom" id="check" type="button"><i class="fa fa-square-o fa-2x fa-fw" aria-hidden="true"></i></button>'
-		);
-		$('#note' + numItems).append('<p class="list-group-item-text desc">' + entries[i][1] + '</p>');
-		if (numItems < entries[i][2]) {
-			numItems = entries[i][2];
+		if (entries[i][3] == 0) {
+			$('#myList').append('<li class="list-group-item task" id="note' +numItems+ '" value="' +entries[i][2]+ '" data-comp="false"></li>');
+			$('#note' + numItems).append(
+				'<h4 class="list-group-item-heading">'
+					// + '<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>&nbsp;' 
+					+ '<strong>' + entries[i][0] + '</strong>' 
+				+ '</h4>'
+				+ '<button class="btn-custom remove" type="button"><i class="fa fa-times fa-2x fa-fw " aria-hidden="true"></i></button>' 
+				+ '<button class="btn-custom" id="check" type="button"><i class="fa fa-square-o fa-2x fa-fw" aria-hidden="true"></i></button>'
+			);
+			$('#note' + numItems).append('<p class="list-group-item-text desc" style="display: block;">' + entries[i][1] + '</p>');
+		} else {
+			$('#otherList').append('<li class="list-group-item task" id="note' +numItems+ '" value="' +entries[i][2]+ '" data-comp="true"></li>');
+			$('#note' + numItems).append(
+				'<h4 class="list-group-item-heading">'
+					// + '<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>&nbsp;' 
+					+ '<strong>' + entries[i][0] + '</strong>' 
+				+ '</h4>'
+				+ '<button class="btn-custom remove" type="button"><i class="fa fa-times fa-2x fa-fw " aria-hidden="true"></i></button>' 
+				+ '<button class="btn-custom" id="check" type="button"><i class="fa fa-check-square fa-2x fa-fw" aria-hidden="true"></i></button>'
+			);
+			$('#note' + numItems).append('<p class="list-group-item-text desc" style="display: none;">' + entries[i][1] + '</p>');
+
 		}
+		numItems++;
 	}
 	console.log("----\nAfter load: " + numItems + " items");
 	console.log(entries);
