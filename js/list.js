@@ -90,7 +90,13 @@ $('#addItemButton').click(function() {
 		// $('#myList').append('<a href="#" class="list-group-item" id="note' + numItems + '" value="1" onClick="complete('+numItems+')">');
 		
 		$('#myList').append('<li class="list-group-item task" id="note' +numItems+ '" value="' +(numItems+1)+ '" data-comp="false"></li>');
-		$('#note' + numItems).append('<h4 class="list-group-item-heading"><span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>&nbsp;' + item + '</h4><i class="fa fa-times fa-2x fa-fw remove" aria-hidden="true"></i><i class="fa fa-square-o fa-2x fa-fw" aria-hidden="true" id="check"></i>');
+		$('#note' + numItems).append(
+			'<h4 class="list-group-item-heading">'
+			+ '<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>&nbsp;' + item 
+			+ '</h4>'
+			+ '<button class="btn-custom remove" type="button"><i class="fa fa-times fa-2x fa-fw " aria-hidden="true"></i></button>' 
+			+ '<button class="btn-custom" id="check" type="button"><i class="fa fa-square-o fa-2x fa-fw" aria-hidden="true"></i></button>'
+		);
 
 		// if there isn't content in text area don't add anything extra
 		if($('#myComment').val() == "") {
@@ -188,7 +194,13 @@ $(document).ready(function () {
 	// entries = [["help", "idk", 1], ["vir", "thakor", 2]];
 	for (var i = 0; i < entries.length; i++) {
 		$('#myList').append('<li class="list-group-item task" id="note' +numItems+ '" value="' +entries[i][2]+ '" data-comp="false"></li>');
-		$('#note' + numItems).append('<h4 class="list-group-item-heading"><span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>&nbsp;' + entries[i][0] + '</h4><i class="fa fa-times fa-2x fa-fw remove" aria-hidden="true"></i><i class="fa fa-square-o fa-2x fa-fw" aria-hidden="true" id="check"></i>');
+		$('#note' + numItems).append(
+			'<h4 class="list-group-item-heading">'
+			+ '<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>&nbsp;' + entries[i][0] 
+			+ '</h4>'
+			+ '<button class="btn-custom remove" type="button"><i class="fa fa-times fa-2x fa-fw " aria-hidden="true"></i></button>' 
+			+ '<button class="btn-custom" id="check" type="button"><i class="fa fa-square-o fa-2x fa-fw" aria-hidden="true"></i></button>'
+		);
 		$('#note' + numItems).append('<p class="list-group-item-text desc">' + entries[i][1] + '</p>');
 		if (numItems < entries[i][2]) {
 			numItems = entries[i][2];

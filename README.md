@@ -1,7 +1,7 @@
 # SimpleList
 
 Chrome Extension that takes over the new tab page to provide a place where you can track your most important tasks.
-It can be difficult to stay focussed, but a reminder of what's on your to-do list will be a nudge in the right direction.
+It can be difficult to stay focussed, but a reminder of what's on your to-do list will be a nudge in the right direction. Since we're always on our computers, a task list in the new tab page is an unobstrusive way to remind yourself about what needs to be done.
 
 ### Usage
 
@@ -21,7 +21,12 @@ It can be difficult to stay focussed, but a reminder of what's on your to-do lis
 
 ### Planned Functionality & To-Do
 
-- align/arrange remove and check boxes
+- Attach a creation date and completion date field managed in background for each task
+- Separate completed tasks to separate page
+- Metrics 
+	- Average time between creation and completion
+	- Rate of completion per month: % of created tasks are completed each month
+	- Number of days since... first task, last task created, last task completed
 
 ### Completed
 
@@ -32,4 +37,5 @@ It can be difficult to stay focussed, but a reminder of what's on your to-do lis
 - Clock along header:  Tuesday, Oct. 3, 2017		10:51 PM
 - tasks are stored in browser localStorage
 - on submit, move focus to the task input box
+- align/arrange remove and check boxes
 
