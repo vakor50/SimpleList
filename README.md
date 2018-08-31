@@ -22,13 +22,15 @@ It can be difficult to stay focussed, but a reminder of what's on your to-do lis
 ### Planned Functionality & To-Do
 
 - Attach a creation date and completion date field managed in background for each task
-- Separate completed tasks to separate page
+- Separate completed tasks to different area
 - Metrics 
-	- Average time between creation and completion
 	- Rate of completion per month: % of created tasks are completed each month
-	- Number of days since... first task, last task created, last task completed
 
 ### Completed
+
+- Metrics
+	- Average time between creation and completion
+	- Number of days since... first task, last task created, last task completed
 
 - Re-organize layout so that adding is on the left and the task list is on the right
 - switch colors of completed and incomplete tasks

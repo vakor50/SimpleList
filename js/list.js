@@ -170,6 +170,7 @@ $('ul').delegate('#check', 'click', function () {
 		$listElem.appendTo('#otherList');
 	}
 	localStorage["newTab_SimpleList_tasks"] = JSON.stringify(entries);
+	calculateCompletionRate()
 });
 
 // ******************************************************** //
@@ -179,6 +180,7 @@ $('ul').delegate('#check', 'click', function () {
 $('ul').delegate('.remove', 'click', function () {
 	for (var i = 0; i < entries.length; i++) {
 		if (entries[i].created == $(this).parent().attr('value')) {
+			entries[i].removed = true;
 			entries.splice(i, 1);
 			console.log("----\nAfter remove:");
 			console.log(entries);
@@ -188,6 +190,7 @@ $('ul').delegate('.remove', 'click', function () {
 	localStorage["newTab_SimpleList_tasks"] = JSON.stringify(entries);
 	console.log(localStorage["newTab_SimpleList_tasks"]);
 	$(this).parent().remove();
+	calculateCompletionRate()
 });
 
 var days = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
@@ -221,6 +224,47 @@ function timeConvert(milli) {
     }
 }
 
+function getShortDate(d) {
+	d = new Date(d)
+	return months[d.getMonth()] + ' ' + d.getDate() + ', ' + d.getFullYear();
+}
+
+function calculateCompletionRate() {
+	var time_diff = 0
+	var month_year = []
+	var first_created = new Date().getTime(),
+		last_created = 0,
+		last_completed = 0;
+	for (var i = 0; i < entries.length; i++) {
+		if (entries[i].completed > 0) {
+			time_diff += (entries[i].completed - entries[i].created); // completed - created
+		}
+		if (entries[i].created < first_created) { first_created = entries[i].created; }
+		if (entries[i].created >= last_created) { last_created = entries[i].created; }
+		if (entries[i].completed > last_completed) { last_completed = entries[i].created; }
+	}
+	time_diff /= entries.length; // average time to complete a task
+	
+	analysis_html = ''
+	analysis_arr = [
+		{name: 'Avg. Completion Time:', id: 'completion_time', data: (time_diff == 0) ? '' : timeConvert(time_diff)},
+		// {name: 'Completion Rate:', id: 'completion_rate', data: time_rate},
+		{name: 'First Task Created:', id: 'first_created', data: (first_created == 0) ? '' : getShortDate(first_created)},
+		{name: 'Last Task Created:', id: 'last_created', data: (last_created == 0) ? '' : getShortDate(last_created)},
+		{name: 'Last Task Completed:', id: 'last_completed', data: (last_completed == 0) ? '' : getShortDate(last_completed)},
+	]
+	for (i = 0; i < analysis_arr.length; i++) {
+		if (analysis_arr[i].data != '') {
+			analysis_html += 
+				'<div class="col-sm-3 col-xs-6">'
+					+ '<h5 class="product">' + analysis_arr[i].name + '</h5>'
+					+ '<p class="product" id="' + analysis_arr[i].id + '">' + analysis_arr[i].data + '</p>'
+				+ '</div>'
+		}
+	}
+	$('#analysis').html(analysis_html)	
+}
+
 $(document).ready(function () {
 	tick();
 
@@ -229,7 +273,7 @@ $(document).ready(function () {
 	}
 	// entries = [["help", "idk", 1], ["vir", "thakor", 2]];
 	for (var i = 0; i < entries.length; i++) {
-		if (entries[i].completed == 0) {
+		if (!entries[i].removed && entries[i].completed == 0) {
 			$('#myList').append('<li class="list-group-item task" id="note' +numItems+ '" value="' + entries[i].created + '" data-comp="false"></li>');
 			$('#note' + numItems).append(
 				'<h4 class="list-group-item-heading">'
@@ -240,7 +284,7 @@ $(document).ready(function () {
 				+ '<button class="btn-custom" id="check" type="button"><i class="fa fa-square-o fa-2x fa-fw" aria-hidden="true"></i></button>'
 			);
 			$('#note' + numItems).append('<p class="list-group-item-text desc" style="display: block;">' + entries[i].description + '</p>');
-		} else {
+		} else if (!entries[i].removed) {
 			$('#otherList').append('<li class="list-group-item task" id="note' +numItems+ '" value="' + entries[i].created + '" data-comp="true"></li>');
 			$('#note' + numItems).append(
 				'<h4 class="list-group-item-heading">'
@@ -258,12 +302,5 @@ $(document).ready(function () {
 	console.log("----\nAfter load: " + numItems + " items");
 	console.log(entries);
 
-	var time_diff = 0
-	for (var i = 0; i < entries.length; i++) {
-		if (entries[i].completed > 0) {
-			time_diff += (entries[i].completed - entries[i].created); // completed - created
-		}
-	}
-	time_diff /= entries.length; // average time to complete a task
-	console.log((time_diff > 0) ? timeConvert(time_diff) : 'No completed tasks')
+	calculateCompletionRate()
 });

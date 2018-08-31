@@ -8,12 +8,12 @@
 	<meta name="description" content="">
 	<meta name="author" content="">
 
-	<!-- <title>To Do List</title> -->
+	<title>To Do List</title>
 
 	<!-- Link for bootstrap -->
 	<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
 
-	<link rel="stylesheet" type="text/css" href="css/bootstrap-theme.min.css">
+	<!-- <link rel="stylesheet" type="text/css" href="css/bootstrap-theme.min.css"> -->
 
 	<link rel="stylesheet" type="text/css" href="css/font-awesome.min.css">
 
@@ -28,77 +28,70 @@
 </head>
 <body>
 	<!-- Navigation -->
-	<nav class="navbar navbar-custom navbar-static-top" role="navigation">
-		<div class="container">
-			<div class="navbar-header">
-				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-main-collapse">
-					Menu <i class="fa fa-bars"></i>
-				</button>
-				<!-- <a class="title navbar-brand page-scroll" href="#page-top">
-					To Do List
-				</a> -->
-			</div>
-
-			<!-- Collect the nav links, forms, and other content for toggling -->
-			<div class="collapse navbar-collapse navbar-right">
-				<!-- <p class="navbar-text">
-					<a class="page-scroll title" href="https://vakor50.github.io/">Vir Thakor</a>
-				</p> -->
-			</div>
-			<!-- /.navbar-collapse -->
-		</div>
+	<nav class="navbar navbar-light bg-none">
+  		<span class="">Created by: <a class="page-scroll title" href="https://vakor50.github.io/">Vir Thakor</a></span>
 	</nav>
 
 	<div class="container">
 		<div class="row">
-			<div class="col-md-8 col-md-offset-1 col-sm-9">
-				<h3 id="date"></h3>
+			<div class="col-sm-9">
+				<h4 id="date"></h4>
 			</div>
-			<div class="col-md-3 col-sm-3">
-				<h3 id="time"></h3>
+			<div class="col-sm-3">
+				<h4 id="time"></h4>
 			</div>
-			<div class="col-md-11 col-md-offset-1">
-				<h1 class="product">
+		</div>
+		<div class="row" style="margin-top: 20px;">
+			<div class="col-sm-12">
+				<h2 class="product">
 					To Do List
-				</h1>
-				<div class="col-md-5 col-sm-5" style="margin-top: 20px;"">
+				</h2>
+			</div>
+			<div class="col-sm-6">
 
-					<!-- ******************************************** -->
-					<!-- 			   Add a List Element	      	  -->
-					<!-- ******************************************** --> 
-					<div id="addItem" class="form-inline">
-						<input class="form-control input" type="text" id="myText" placeholder="Enter task name">
-						<br>
-						<textarea id="myComment" placeholder="Enter details" class="form-control input" rows="3"></textarea>
-						<br>
+				<!-- ******************************************** -->
+				<!-- 			   Add a List Element	      	  -->
+				<!-- ******************************************** --> 
+				<div id="addItem" class="form-inline">
+					<input class="form-control input" type="text" id="myText" placeholder="Enter task name">
+					<br>
+					<textarea id="myComment" placeholder="Enter details" class="form-control input" rows="3"></textarea>
+					<br>
+					<div class="btn-group" role="group">
 						<button id="addItemButton" class="btn">Add Task</button>
 					</div>
-				</div>
-
-				<!-- ******************************************** -->
-				<!-- 			  Items on ToDo List 			  -->
-				<!-- ******************************************** -->
-				<div class="col-md-6 col-sm-6">
-					<div class="panel panel-default" style="margin-top: 20px; background-color: #0E0B16;">
-						<!-- List group -->
-						<ul id="myList" class="list-group">
-						</ul>
-
-						<!-- List group -->
-						<ul id="otherList" class="list-group">
-						</ul>
+					<div class="btn-group" role="group">
+						<button class="btn" type="button" data-toggle="collapse" data-target="#analysis" aria-expanded="false" aria-controls="analysis">
+							Analysis
+						</button>
 					</div>
+				</div>
+			</div>
+
+			<!-- ******************************************** -->
+			<!-- 			  Items on ToDo List 			  -->
+			<!-- ******************************************** -->
+			<div class="col-sm-6">
+				<div class="panel panel-default" style="background-color: #0E0B16;">
+					<!-- List group -->
+					<ul id="myList" class="list-group">
+					</ul>
+
+					<!-- List group -->
+					<ul id="otherList" class="list-group">
+					</ul>
 				</div>
 			</div>
 		</div>
-		<footer class="footer">
-			<div class="container">
-				<span>Created by: </span><a class="page-scroll title" href="https://vakor50.github.io/">Vir Thakor</a>
-			</div>
-		</footer>
+		<div class="row collapse" id="analysis">
+		</div>
+	</div>
+
 
 		<!-- jQuery -->
-		<script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
+		<script type="text/javascript" src="js/jquery-3.3.1.slim.min.js"></script>
+		<!-- Popper -->
+		<script type="text/javascript" src="js/popper.min.js"></script>
 		<!-- Bootstrap -->
 		<script type="text/javascript" src="js/bootstrap.min.js"></script>
 
